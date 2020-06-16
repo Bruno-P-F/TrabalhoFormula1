@@ -1,0 +1,83 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <ui:composition template="/privado/template/template.xhtml">
+        <ui:define name="conteudo">
+            <p:panel id="panel" header="Grande Premio" style="margin: 20px;">
+                <div class="ui-g">
+                    <div class="ui-g-6">
+                        <label>Localizacao</label><br/>
+                        <p:inputText id="localizacao" value="#{grandprixMB.grandprix.localizacao}" style="width: 98%;"
+                                     required="true" requiredMessage="Localizacao e obrigatoria"/>
+                    </div>
+                    <div class="ui-g-2">
+                        <label>Voltas</label><br/>
+                        <p:inputText id="voltas" value="#{grandprixMB.grandprix.voltas}" style="width: 98%;"
+                                     required="true" requiredMessage="Voltas sao obrigatorias"/>
+                    </div>
+                    <div class="ui-g-2">
+                        <label>Ano da Corrida</label><br/>
+                        <p:inputText id="anoCorrida" value="#{grandprixMB.grandprix.anoCorrida}" style="width: 98%;"
+                                     required="true" requiredMessage="Ano da Corrida e obrigatorio"/>
+                    </div>
+                    <div class="ui-g-2">
+                        <label>Percurso(Em Kilomentros)</label><br/>
+                        <p:inputText id="percursoKm" value="#{grandprixMB.grandprix.percursoKm}" style="width: 98%;"
+                                     required="true" requiredMessage="Percurso e obrigatorio"/>
+                    </div>
+                </div>
+                <div class="ui-g">
+                    <div class="ui-g-6">
+                        <label>Pilotos</label><br/>
+                        <p:selectOneMenu id="piloto" value="#{grandprixMB.gpposicao.piloto}" style="width: 95%"
+                                         converter="entityConverter">
+                            <f:selectItem itemLabel="--- Selecione um piloto ---" noSelectionOption="true"/>
+                            <f:selectItems value="#{pilotoMB.pilotos}" var="piloto"
+                                           itemLabel="#{piloto.nome}" itemValue="#{piloto}"/>
+                            <p:ajax event="change"/>
+                        </p:selectOneMenu>
+                    </div>
+                    <div class="ui-g-2">
+                        <label>Posicao Final</label><br/>
+                        <p:inputText id="posicao" value="#{grandprixMB.gpposicao.classificacao}" style="width: 95%"/>
+                    </div>
+                    <div class="ui-g-2">
+                        <br/>
+                        <p:commandButton id="add" action="#{grandprixMB.addPiloto()}" value="Adicionar" 
+                                         icon="ui-icon-plus" update="posicoesPilotos, piloto, posicao, growl"/>
+                    </div>
+                </div>
+                <div class="ui-g">
+                    <div class="ui-g-12">
+                        <p:dataTable id="posicoesPilotos" value="#{grandprixMB.gpposicoes}" var="posicaoPiloto"
+                                     emptyMessage="Nenhum piloto adicionado">
+                            <p:column headerText="Classificacao" width="200" sortBy="#{posicao.classificacao}">
+                                #{posicaoPiloto.classificacao}
+                            </p:column>
+                            <p:column headerText="Piloto" style="text-align: center;">
+                                #{posicaoPiloto.piloto.nome}
+                            </p:column>
+                            <p:column headerText="Pontos" width="200" style="text-align: center;">
+                                #{posicaoPiloto.pontos}
+                            </p:column>
+                            <p:column headerText="Excluir" width="80" style="text-align: center;">
+                                <p:commandButton id="excluir" action="#{grandprixMB.removePiloto(posicaoPiloto)}" icon="ui-icon-trash"
+                                                 update="posicoesPilotos" immediate="true"/>
+                            </p:column>
+                        </p:dataTable>
+                    </div>
+                </div>
+                <br/>
+                <div align="center">
+                    <p:commandButton action="#{grandprixMB.salvar()}" value="Salvar" update="growl" style="margin-right: 10px;"/>
+                    <p:commandButton action="#{grandprixMB.cancelar()}" value="Cancelar" immediate="true"/>
+                </div>
+                <br/>
+            </p:panel>
+        </ui:define>
+    </ui:composition>
+</html>

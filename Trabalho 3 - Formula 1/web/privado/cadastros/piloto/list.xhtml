@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <ui:composition template="/privado/template/template.xhtml">
+        <ui:define name="conteudo">
+            <p:panel id="panel" header="Pilotos" style="margin: 20px;">
+                <p:dataTable value="#{pilotoMB.pilotos}" var="piloto"
+                             emptyMessage="Nenhum piloto encontrado" style="margin: 10px;"
+                             paginator="true" paginatorPosition="bottom" rows="10">
+                    <p:column headerText="Nome" sortBy="#{piloto.nome}">
+                        <h:outputText value="#{piloto.nome}"/>
+                    </p:column>
+                    <p:column headerText="Numero" sortBy="#{piloto.numero}">
+                        <h:outputText value="#{piloto.numero}"/>
+                    </p:column>
+                    <p:column headerText="Nacionalidade" sortBy="#{piloto.nacionalidade}">
+                        <h:outputText value="#{piloto.nacionalidade}"/>
+                    </p:column>
+                    <p:column headerText="Equipe" sortBy="#{piloto.idEquipe.nome}">
+                        <h:outputText value="#{piloto.idEquipe.nome}"/>
+                    </p:column>
+                    <p:column headerText="Editar" width="80" style="text-align: center;">
+                        <p:commandButton action="#{pilotoMB.buscaDados(piloto)}" icon="ui-icon-pencil" title="Editar"/>
+                    </p:column>
+                    <p:column headerText="Excluir" width="80" style="text-align: center;">
+                        <p:commandButton action="#{pilotoMB.excluir(piloto)}" icon="ui-icon-trash" title="Excluir"
+                                       onclick="if (!confirm('Tem certeza em deletar esse dado?')) return false" update=":form:growl"/>
+                    </p:column>
+                </p:dataTable>
+                <div align="center">
+                    <p:commandButton id="novo" value="Novo" action="#{pilotoMB.novo()}"/>
+                </div>
+            </p:panel>
+        </ui:define>
+    </ui:composition>
+</html>

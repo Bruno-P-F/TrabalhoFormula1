@@ -1,0 +1,35 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:composition template="/privado/template/template.xhtml">
+        <ui:define name="conteudo">
+            <p:panel id="panel" header="Grande Premio" style="margin: 20px;">
+                Localizacao da Corrida:<br/>
+                <h:outputLabel value="#{grandprixMB.grandprix.localizacao}"/><br/><br/>
+                Ano da Corrida:<br/>
+                <h:outputLabel value="#{grandprixMB.grandprix.anoCorrida}"/><br/><br/>
+                Percurso (Em Kilometros):<br/>
+                <h:outputLabel value="#{grandprixMB.grandprix.percursoKm}"/><br/><br/>
+                <p:dataTable id="posicoesPilotos" value="#{grandprixMB.gpposicoes}" var="posicaoPiloto"
+                            emptyMessage="Nenhum piloto adicionado">
+                    <p:column headerText="Classificacao" width="200" sortBy="#{posicao.classificacao}">
+                        #{posicaoPiloto.classificacao}
+                    </p:column>
+                    <p:column headerText="Piloto" style="text-align: center;">
+                        #{posicaoPiloto.piloto.nome}
+                    </p:column>
+                    <p:column headerText="Pontos" width="200" style="text-align: center;">
+                        #{posicaoPiloto.pontos}
+                    </p:column>
+                </p:dataTable><br/>
+                <div align="center">
+                    <p:commandButton id="voltar" value="Voltar" action="#{grandprixMB.cancelar()}"/>
+                </div>
+            </p:panel>
+        </ui:define>
+    </ui:composition>
+</html>

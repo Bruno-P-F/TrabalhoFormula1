@@ -1,0 +1,17 @@
+*{
+    margin:0;
+    padding:0;
+    font:18px Verdana,Geneva sans-serif;
+}
+.cabecalho{
+    width:100%;
+    background:rgb(207,207,207);
+    padding-top:10px;
+    padding-bottom:10px;
+    text-align:center;
+}
+.tituloCabecalho{
+    font-size:32px;
+    font-weight:bold;
+    color:rgb(80,80,80);
+}

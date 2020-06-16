@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <ui:composition template="/privado/template/template.xhtml">
+        <ui:define name="conteudo">
+            <p:panel id="panel" header="Equipes" style="margin: 20px;">
+                <div class="ui-g">
+                    <div class="ui-g-8">
+                        <label>Nome</label><br/>
+                        <p:inputText id="nome" value="#{equipeMB.equipe.nome}" style="width: 98%;"
+                                     required="true" requiredMessage="Nome e obrigatoria"/>
+                    </div>
+                    <div class="ui-g-4">
+                        <label>Pais</label><br/>
+                        <p:inputText id="pais" value="#{equipeMB.equipe.pais}" style="width: 98%;"
+                                     required="true" requiredMessage="Pais e obrigatoria"/>
+                    </div>
+                </div>
+                <br/>
+                <div align="center">
+                    <p:commandButton action="#{equipeMB.salvar()}" value="Salvar" update="growl" style="margin-right: 10px;"/>
+                    <p:commandButton action="#{equipeMB.cancelar()}" value="Cancelar" immediate="true"/>
+                </div>
+                <br/>
+            </p:panel>
+        </ui:define>
+    </ui:composition>
+</html>
